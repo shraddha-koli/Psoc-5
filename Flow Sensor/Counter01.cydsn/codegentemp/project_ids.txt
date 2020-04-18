@@ -1,0 +1,8 @@
+C:\Users\shkoli\Downloads\CE95350\CE95350.cydsn\Counter01.cydsn\Counter01.cyprj|8be8395b-cc1c-4e0a-974b-1c29a6ab9e1d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|a1c2c984-6c1e-4611-8bf2-0a04afbb1f21
+C:\Users\shkoli\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|c9a4aa8e-bde8-4165-bc75-84424725d2a8
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|fea74cc2-659f-49d8-9e56-83a5854c6835
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|b6955ee8-3476-4f86-81ac-7a5489f5b268
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|3ee9337f-5dd9-46f7-879e-75da096f6da3
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|b91e7d50-2e1e-411d-b5f3-05174f22d7be
+C:\Users\shkoli\Downloads\CE95350\CE95350.cydsn\CE95350.cyprj|a472a9ba-abff-4627-92ea-52f2a0dd79fd

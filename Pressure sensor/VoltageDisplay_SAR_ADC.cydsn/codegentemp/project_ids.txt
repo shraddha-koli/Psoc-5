@@ -1,0 +1,7 @@
+C:\Users\shkoli\Documents\PSoC Creator\CE222793_MotionSensor_RTOS\CE218138_BLE_Thermometer_RTOS\adcpsoc5\voltageDisplay_SAR_ADC\VoltageDisplay_SAR_ADC.cydsn\VoltageDisplay_SAR_ADC.cyprj|1f3b0353-c34e-4c6e-a118-573e9115cdb6
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|55076eb0-26ce-4c5c-9d5e-565a56428a3a
+C:\Users\shkoli\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|cdafa331-11b9-4d52-a147-70643887ce5e
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|373f5783-edfe-48dd-9d51-3619da881ce0
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|863473f5-6a91-4502-b4e1-20c951efa5fa
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|80a4d8ab-ced5-4e5d-91c8-fe042e26741c
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|bbb068ab-a62b-452a-b09d-8d810e5e87f1

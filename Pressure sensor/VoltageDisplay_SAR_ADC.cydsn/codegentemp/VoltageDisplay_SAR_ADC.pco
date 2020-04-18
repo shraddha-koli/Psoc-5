@@ -1,0 +1,43 @@
+# VoltageDisplay_SAR_ADC
+# 2020-04-14 08:22:17Z
+
+# IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 0
+# IO_1@[IOP=(1)][IoId=(1)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 1
+set_location "ClockBlock" clockblockcell -1 -1 0
+set_io "VoltInput(0)" iocell 6 5
+set_io "\LCD:LCDPort(0)\" iocell 2 0
+set_io "\LCD:LCDPort(1)\" iocell 2 1
+set_io "\LCD:LCDPort(2)\" iocell 2 2
+set_io "\LCD:LCDPort(3)\" iocell 2 3
+set_io "\LCD:LCDPort(4)\" iocell 2 4
+set_io "\LCD:LCDPort(5)\" iocell 2 5
+set_io "\LCD:LCDPort(6)\" iocell 2 6
+set_io "mySCL(0)" iocell 3 1
+set_io "mySDA(0)" iocell 3 2
+set_io "P0_4(0)" iocell 3 4
+set_io "P0_5(0)" iocell 15 2
+set_io "\CharLCD_1:LCDPort(0)\" iocell 12 0
+set_io "\CharLCD_1:LCDPort(1)\" iocell 12 1
+set_io "\CharLCD_1:LCDPort(2)\" iocell 12 2
+set_io "\CharLCD_1:LCDPort(3)\" iocell 12 3
+set_io "\CharLCD_1:LCDPort(4)\" iocell 12 4
+set_io "\CharLCD_1:LCDPort(5)\" iocell 12 5
+set_io "\CharLCD_1:LCDPort(6)\" iocell 12 6
+set_io "Pin_1(0)" iocell 1 6
+set_location "\Counter_1:CounterUDB:status_0\" 3 1 0 0
+set_location "\Counter_1:CounterUDB:status_2\" 3 0 0 3
+set_location "\Counter_1:CounterUDB:count_enable\" 3 0 0 0
+set_location "\ADC:IRQ\" interrupt -1 -1 1
+set_location "\ADC:ADC_SAR\" sarcell -1 -1 0
+set_location "__ONE__" 0 3 1 2
+set_location "\Counter_1:CounterUDB:sCTRLReg:ctrlreg\" 3 0 6
+set_location "\Counter_1:CounterUDB:sSTSReg:stsreg\" 3 1 4
+set_location "\Counter_1:CounterUDB:sC24:counterdp:u0\" 2 0 2
+set_location "\Counter_1:CounterUDB:sC24:counterdp:u1\" 3 0 2
+set_location "\Counter_1:CounterUDB:sC24:counterdp:u2\" 3 1 2
+set_location "CounterISR" interrupt -1 -1 0
+set_location "\Counter_1:CounterUDB:overflow_reg_i\" 3 0 0 2
+set_location "\Counter_1:CounterUDB:prevCompare\" 3 1 0 1
+set_location "\Counter_1:CounterUDB:count_stored_i\" 3 0 0 1

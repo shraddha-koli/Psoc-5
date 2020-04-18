@@ -1,0 +1,64 @@
+--------------- Build Started: 04/15/2020 10:35:06 Project: VoltageDisplay_SAR_ADC, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+The code generation step is up to date.
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I..\..\..\..\..\..\..\Downloads\FreeRTOSv10.3.0\FreeRTOS\Source\include -I..\..\..\..\..\..\..\Downloads\FreeRTOSv10.3.0\FreeRTOS\Source\portable\GCC\ARM_CM0 -I..\..\..\..\..\..\..\Downloads\FreeRTOSv10.3.0\FreeRTOS-Plus\Source\FreeRTOS-Plus-CLI -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_541\Debug/main.lst -g -Wall -ffunction-sections -ffat-lto-objects -O0 -c main.c -o .\ARM_GCC_541\Debug\main.o
+In file included from main.c:65:0:
+c:\users\shkoli\downloads\freertosv10.3.0\freertos\source\include\freertos.h:80:3: error: #error Missing definition: configMINIMAL_STACK_SIZE must be defined in FreeRTOSConfig.h. configMINIMAL_STACK_SIZE defines the size (in words) of the stack allocated to the idle task. Refer to the demo project provided for your port for a suitable value.
+  #error Missing definition:  configMINIMAL_STACK_SIZE must be defined in FreeRTOSConfig.h.  configMINIMAL_STACK_SIZE defines the size (in words) of the stack allocated to the idle task.  Refer to the demo project provided for your port for a suitable value.
+   ^
+In file included from main.c:65:0:
+c:\users\shkoli\downloads\freertosv10.3.0\freertos\source\include\freertos.h:84:3: error: #error Missing definition: configMAX_PRIORITIES must be defined in FreeRTOSConfig.h. See the Configuration section of the FreeRTOS API documentation for details.
+  #error Missing definition:  configMAX_PRIORITIES must be defined in FreeRTOSConfig.h.  See the Configuration section of the FreeRTOS API documentation for details.
+   ^
+c:\users\shkoli\downloads\freertosv10.3.0\freertos\source\include\freertos.h:88:3: error: #error configMAX_PRIORITIES must be defined to be greater than or equal to 1.
+  #error configMAX_PRIORITIES must be defined to be greater than or equal to 1.
+   ^
+c:\users\shkoli\downloads\freertosv10.3.0\freertos\source\include\freertos.h:92:3: error: #error Missing definition: configUSE_PREEMPTION must be defined in FreeRTOSConfig.h as either 1 or 0. See the Configuration section of the FreeRTOS API documentation for details.
+  #error Missing definition:  configUSE_PREEMPTION must be defined in FreeRTOSConfig.h as either 1 or 0.  See the Configuration section of the FreeRTOS API documentation for details.
+   ^
+The command 'arm-none-eabi-gcc.exe' failed with exit code '1'.
+c:\users\shkoli\downloads\freertosv10.3.0\freertos\source\include\freertos.h:96:3: error: #error Missing definition: configUSE_IDLE_HOOK must be defined in FreeRTOSConfig.h as either 1 or 0. See the Configuration section of the FreeRTOS API documentation for details.
+  #error Missing definition:  configUSE_IDLE_HOOK must be defined in FreeRTOSConfig.h as either 1 or 0.  See the Configuration section of the FreeRTOS API documentation for details.
+   ^
+c:\users\shkoli\downloads\freertosv10.3.0\freertos\source\include\freertos.h:100:3: error: #error Missing definition: configUSE_TICK_HOOK must be defined in FreeRTOSConfig.h as either 1 or 0. See the Configuration section of the FreeRTOS API documentation for details.
+  #error Missing definition:  configUSE_TICK_HOOK must be defined in FreeRTOSConfig.h as either 1 or 0.  See the Configuration section of the FreeRTOS API documentation for details.
+   ^
+c:\users\shkoli\downloads\freertosv10.3.0\freertos\source\include\freertos.h:104:3: error: #error Missing definition: configUSE_16_BIT_TICKS must be defined in FreeRTOSConfig.h as either 1 or 0. See the Configuration section of the FreeRTOS API documentation for details.
+  #error Missing definition:  configUSE_16_BIT_TICKS must be defined in FreeRTOSConfig.h as either 1 or 0.  See the Configuration section of the FreeRTOS API documentation for details.
+   ^
+main.c: In function 'Write_One_Byte':
+main.c:175:9: warning: variable 'acktemp' set but not used [-Wunused-but-set-variable]
+     int acktemp = 1;
+         ^
+main.c: In function 'Read_One_Byte':
+main.c:188:9: warning: variable 'acktemp' set but not used [-Wunused-but-set-variable]
+     int acktemp = 1;
+         ^
+main.c: In function 'main':
+main.c:255:5: error: unknown type name 'pthread'
+     pthread t;
+     ^
+main.c:255:13: warning: unused variable 't' [-Wunused-variable]
+     pthread t;
+             ^
+main.c:246:11: warning: unused variable 'dis' [-Wunused-variable]
+     uchar dis[8];
+           ^
+main.c:244:17: warning: unused variable 'temp' [-Wunused-variable]
+     long int ad,temp;
+                 ^
+main.c:227:12: warning: unused variable 'averageVolts' [-Wunused-variable]
+     uint32 averageVolts = 0;
+            ^
+main.c:224:11: warning: unused variable 'voltSamples' [-Wunused-variable]
+     int32 voltSamples = 0;
+           ^
+main.c:221:11: warning: unused variable 'sampleCount' [-Wunused-variable]
+     uint8 sampleCount = 0;
+           ^
+main.c:218:11: warning: unused variable 'mVolts' [-Wunused-variable]
+     int32 mVolts = 0;
+           ^
+main.c:215:11: warning: unused variable 'voltCount' [-Wunused-variable]
+     int32 voltCount = 0;
+           ^
+--------------- Build Failed: 04/15/2020 10:35:06 ---------------
