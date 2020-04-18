@@ -1,0 +1,269 @@
+C51 COMPILER V9.56.0.0   MAIN                                                              04/17/2019 16:16:18 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #include <math.h>
+   3          #define DELAY_TIME 60
+   4          #define TRUE 1
+   5          #define FALSE 0
+   6          #define uchar unsigned char
+   7          #define uint unsigned int
+   8            
+   9          sbit SCL = P1 ^ 7;
+  10          sbit SDA = P1 ^ 6;
+  11          sbit Max7219_pinCLK = P2 ^ 2;
+  12          sbit Max7219_pinCS = P2 ^ 1;
+  13          sbit Max7219_pinDIN = P2 ^ 0;
+  14          
+  15          void DELAY(unsigned int t)
+  16          {
+  17   1          while (t != 0)
+  18   1              t--;
+  19   1      }
+  20          void I2C_Start(void)
+  21          {
+  22   1          SDA = 1;
+  23   1          SCL = 1;
+  24   1          DELAY(DELAY_TIME);
+  25   1          SDA = 0;
+  26   1          DELAY(DELAY_TIME);
+  27   1          SCL = 0;
+  28   1          DELAY(DELAY_TIME);
+  29   1      }
+  30          
+  31          void I2C_Stop(void)
+  32          {
+  33   1          SDA = 0;
+  34   1          SCL = 1;
+  35   1          DELAY(DELAY_TIME);
+  36   1          SDA = 1;
+  37   1          DELAY(DELAY_TIME);
+  38   1          SCL = 0;
+  39   1          DELAY(DELAY_TIME);
+  40   1      }
+  41          
+  42          void SEND_0(void)
+  43          {
+  44   1          SDA = 0;
+  45   1          SCL = 1;
+  46   1          DELAY(DELAY_TIME);
+  47   1          SCL = 0;
+  48   1          DELAY(DELAY_TIME);
+  49   1      }
+  50          
+  51          void SEND_1(void)
+  52          {
+  53   1      
+  54   1          SDA = 1;
+C51 COMPILER V9.56.0.0   MAIN                                                              04/17/2019 16:16:18 PAGE 2   
+
+  55   1          SCL = 1;
+  56   1          DELAY(DELAY_TIME);
+  57   1          SCL = 0;
+  58   1          DELAY(DELAY_TIME);
+  59   1      }
+  60          
+  61          bit Check_Acknowledge(void)
+  62          {
+  63   1      
+  64   1          SDA = 1;
+  65   1          SCL = 1;
+  66   1          DELAY(DELAY_TIME / 2);
+  67   1          F0 = SDA;
+  68   1          DELAY(DELAY_TIME / 2);
+  69   1          SCL = 0;
+  70   1          DELAY(DELAY_TIME);
+  71   1          if (F0 == 1)
+  72   1              return FALSE;
+  73   1          return TRUE;
+  74   1      }
+  75          
+  76          void WriteI2CByte(unsigned char b) reentrant
+  77          {
+  78   1      
+  79   1          char i;
+  80   1          for (i = 0; i < 8; i++)
+  81   1              if ((b << i) & 0x80)
+  82   1                  SEND_1();
+  83   1              else
+  84   1                  SEND_0();
+  85   1      }
+  86          
+  87          unsigned char ReadI2CByte(void) reentrant
+  88          {
+  89   1      
+  90   1          char b = 0, i;
+  91   1          for (i = 0; i < 8; i++)
+  92   1          {
+  93   2              SDA = 1;
+  94   2              SCL = 1;
+  95   2              DELAY(10);
+  96   2              F0 = SDA;
+  97   2              DELAY(10);
+  98   2              SCL = 0;
+  99   2              if (F0 == 1)
+ 100   2              {
+ 101   3                  b = b << 1;
+ 102   3                  b = b | 0x01;
+ 103   3              }
+ 104   2              else
+ 105   2                  b = b << 1;
+ 106   2          }
+ 107   1          return b;
+ 108   1      }
+ 109          
+ 110          void Write_One_Byte(unsigned char addr, unsigned char thedata)
+ 111          {
+ 112   1          bit acktemp = 1;
+ 113   1          I2C_Start();
+ 114   1          WriteI2CByte(0xDA);
+ 115   1          acktemp = Check_Acknowledge();
+ 116   1          WriteI2CByte(addr); /*address*/
+C51 COMPILER V9.56.0.0   MAIN                                                              04/17/2019 16:16:18 PAGE 3   
+
+ 117   1          acktemp = Check_Acknowledge();
+ 118   1          WriteI2CByte(thedata); /*thedata*/
+ 119   1          acktemp = Check_Acknowledge();
+ 120   1          I2C_Stop();
+ 121   1      }
+ 122          
+ 123          unsigned char Read_One_Byte(unsigned char addr)
+ 124          {
+ 125   1          bit acktemp = 1;
+ 126   1          unsigned char mydata;
+ 127   1      
+ 128   1          I2C_Start();
+ 129   1          WriteI2CByte(0xDA);
+ 130   1          acktemp = Check_Acknowledge();
+ 131   1          WriteI2CByte(addr); /*address*/
+ 132   1          acktemp = Check_Acknowledge();
+ 133   1          I2C_Start();
+ 134   1          WriteI2CByte(0xDB);
+ 135   1          acktemp = Check_Acknowledge();
+ 136   1      
+ 137   1          mydata = ReadI2CByte();
+ 138   1          acktemp = Check_Acknowledge();
+ 139   1          I2C_Stop();
+ 140   1          return mydata;
+ 141   1      }
+ 142          void Delay_xms(uint x)
+ 143          {
+ 144   1          uint i, j;
+ 145   1          for (i = 0; i < x; i++)
+ 146   1              for (j = 0; j < 112; j++)
+ 147   1                  ;
+ 148   1      }
+ 149          
+ 150          void Write_Max7219_byte(uchar DATA)
+ 151          {
+ 152   1          uchar i;
+ 153   1          Max7219_pinCS = 0;
+ 154   1          for (i = 8; i >= 1; i--)
+ 155   1          {
+ 156   2              Max7219_pinCLK = 0;
+ 157   2              Max7219_pinDIN = DATA & 0x80;
+ 158   2              DATA = DATA << 1;
+ 159   2              Max7219_pinCLK = 1;
+ 160   2          }
+ 161   1      }
+ 162          
+ 163          void Write_Max7219(uchar address, uchar dat)
+ 164          {
+ 165   1          Max7219_pinCS = 0;
+ 166   1          Write_Max7219_byte(address);
+ 167   1          Write_Max7219_byte(dat);
+ 168   1          Max7219_pinCS = 1;
+ 169   1      }
+ 170          
+ 171          void Init_MAX7219(void)
+ 172          {
+ 173   1          Write_Max7219(0x09, 0xff);
+ 174   1          Write_Max7219(0x0a, 0x03);
+ 175   1          Write_Max7219(0x0b, 0x07);
+ 176   1          Write_Max7219(0x0c, 0x01);
+ 177   1          Write_Max7219(0x0f, 0x01);
+ 178   1      }
+C51 COMPILER V9.56.0.0   MAIN                                                              04/17/2019 16:16:18 PAGE 4   
+
+ 179          void main(void)
+ 180          {
+ 181   1          unsigned char yali1, yali2, yali3;
+ 182   1          unsigned char temp_a5;
+ 183   1          long int ad;
+ 184   1          long float pas;
+ 185   1          unsigned char dis[8];
+ 186   1          Init_MAX7219();
+ 187   1          Delay_xms(1000);
+ 188   1          Write_Max7219(0x0f, 0x00);
+ 189   1          while (1)
+ 190   1          {
+ 191   2      
+ 192   2              temp_a5 = Read_One_Byte(0xA5);
+ 193   2              temp_a5 = temp_a5 & 0xFD;
+ 194   2              Write_One_Byte(0xA5, temp_a5);
+ 195   2              Write_One_Byte(0x30, 0x0A);
+ 196   2              while ((Read_One_Byte(0x30) & 0x08) > 0)
+ 197   2                  ;
+ 198   2              yali1 = Read_One_Byte(0x06);
+ 199   2              yali2 = Read_One_Byte(0x07);
+ 200   2              yali3 = Read_One_Byte(0x08);
+ 201   2      
+ 202   2              ad = yali1 * 65536 + yali2 * 256 + yali3;
+ 203   2              if (ad > 8388608)
+ 204   2              {
+ 205   3                  pas = (ad - 16777216) *  0.25;
+ 206   3              }
+ 207   2              else
+ 208   2              {
+ 209   3                  pas = ad * 0.25;
+ 210   3              }
+ 211   2              if (pas < 0)
+ 212   2                  pas = fabs(pas);
+ 213   2              dis[0] = (long int)pas / 10000000;
+ 214   2              dis[1] = (long int)pas % 10000000 / 1000000;
+ 215   2              dis[2] = (long int)pas % 1000000 / 100000;
+ 216   2              dis[3] = (long int)pas % 100000 / 10000;
+ 217   2              dis[4] = (long int)pas % 10000 / 1000;
+ 218   2              dis[5] = (long int)pas % 1000 / 100;
+ 219   2              dis[6] = (long int)pas % 100 / 10;
+ 220   2              dis[7] = (long int)pas % 10;
+ 221   2              Write_Max7219(8, dis[0]);
+ 222   2              Write_Max7219(7, dis[1]);
+ 223   2              Write_Max7219(6, dis[2]);
+ 224   2              Write_Max7219(5, dis[3]);
+ 225   2              Write_Max7219(4, dis[4]);
+ 226   2              Write_Max7219(3, dis[5]);
+ 227   2              Write_Max7219(2, dis[6]);
+ 228   2              Write_Max7219(1, dis[7]);
+ 229   2              Delay_xms(100);
+ 230   2          }
+ 231   1      }
+ 232          
+ 233          
+ 234          //这是我在这做的的自认为最有价值的事情，不知道谁会看到它，
+ 235          //写不的好也不求你的原谅，有本事顺着网线来打我
+ 236          //略略略
+ 237          //提供有限技术支持，如果你能找得到我的话
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.56.0.0   MAIN                                                              04/17/2019 16:16:18 PAGE 5   
+
+   CODE SIZE        =   1047    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      18
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       2
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
